@@ -1,225 +1,69 @@
-# V1版本开发文档
+# v2版本更新文档
 
-<!-- date: 2025-03-05 -->
+<!-- date: 2025-03-06 -->
 
-## 项目概述
+## 上一版本的主要问题
 
-V1版本是2Dog的小窝博客系统的初始版本，采用了简洁的VSCode风格设计，主要实现了基础的博客展示功能和暗/亮主题切换功能。该版本采用纯静态HTML+CSS+JavaScript实现，无需后端支持，便于部署和维护。
+### 1. 页面样式错误
+
+- 首页的样式表未能对文章页面起效
+- 切换主题功能在文章界面也无效
+
+### 2. UI不够现代化
+
+- 界面太过于简陋
+
+### 3. 未完善meta标签使得中文显示乱码
 
 
 
-## 技术栈
+## 主要变化
 
-- **前端**: 纯HTML、CSS、JavaScript
+### 1. 页面结构与导航优化
 
-- **部署**: 静态网页托管
+- **添加了"关于我"页面**：新增了about.html页面，提供了个人介绍功能
 
-- **设计风格**: VSCode IDE风格
+- **改进了页面导航**：在所有页面添加了统一的导航栏，便于在不同页面间切换
+
+- **添加了页脚**：所有页面增加了统一的页脚，包含GitHub链接和个性签名
 
   
 
-## 文件结构
+### 2. 样式与布局
 
-```
-/your-blog v1/
-├── css/
-│   ├── dark.css     # 暗色主题样式
-│   └── light.css    # 亮色主题样式
-├── js/
-│   └── theme.js     # 主题切换功能
-├── posts/
-│   ├── post1.html   # 第一篇文章
-│   └── post2.html   # 第二篇文章
-└── index.html       # 首页
-```
+- **改进了页面布局**：使用了更合理的div容器组织内容，如nav-container
 
+- **统一了页面风格**：所有页面采用一致的标题、导航和页脚样式
 
+- **完善了meta标签**：声明UTF-8格式，实现中文支持
 
-## 功能实现
+  
 
-### 1. 主题切换功能
+### 3. 主题切换功能增强
 
-主题切换功能通过JavaScript实现，使用LocalStorage保存用户的主题偏好。
+- **优化了主题切换逻辑**：改进了theme.js，增加了对不同页面路径的支持
 
-**实现方式**:
-- 在HTML中设置`data-theme`属性标识当前主题
-- 通过切换CSS文件实现主题外观变化
-- 使用LocalStorage记住用户的主题选择
+  
 
-**核心代码**:
-```javascript
-function toggleTheme() {
-    const themeLink = document.getElementById('theme-style');
-    const isDark = themeLink.href.includes('dark');
-    
-    // 切换CSS文件
-    themeLink.href = isDark ? 'css/light.css' : 'css/dark.css';
-    
-    // 保存到LocalStorage
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-}
+  
 
-// 初始化主题
-const savedTheme = localStorage.getItem('theme') || 'light';
-document.getElementById('theme-style').href = `css/${savedTheme}.css`;
-```
+## 技术改进
 
+1. **代码结构更加清晰**：使用了更合理的HTML结构和CSS类名
 
+2. **增强了主题切换功能**：theme.js能够根据页面路径自动调整CSS路径
 
-### 2. 页面结构
-
-#### index.html
-
-首页采用简洁的布局，主要包含：
-- 标题栏（带主题切换按钮）
-- 文章列表导航
-
-```html
-<!DOCTYPE html>
-<html data-theme="light">
-<head>
-    <title>我的博客</title>
-    <!-- 主题切换链接 -->
-    <link id="theme-style" rel="stylesheet" href="css/light.css">
-</head>
-<body>
-    <header>
-        <h1>VSCode风格博客</h1>
-        <button onclick="toggleTheme()">切换主题</button>
-    </header>
-    
-    <nav>
-        <h3>文章列表</h3>
-        <ul>
-            <li><a href="posts/post1.html">第一篇文章</a></li>
-            <li><a href="posts/post2.html">第二篇文章</a></li>
-        </ul>
-    </nav>
-
-    <script src="js/theme.js"></script>
-</body>
-</html>
-```
-
-
-
-#### 文章页面 
-
-文章页面结构包含：
-- 标题栏（与首页一致）
-- 文章内容区域（标题、日期、正文）
-- 代码块展示
-
-```html
-<!DOCTYPE html>
-<html data-theme="light">
-<head>
-    <title>第一篇文章</title>
-    <link id="theme-style" rel="stylesheet" href="../css/light.css">
-</head>
-<body>
-    <header>
-        <h1>VSCode风格博客</h1>
-        <button onclick="toggleTheme()">切换主题</button>
-    </header>
-
-    <article>
-        <h2>我的第一篇文章</h2>
-        <time>2023-08-20</time>
-        
-        <!-- 文章内容 -->
-        <p>这是通过VS Code的 <code>Markdown Preview Enhanced</code> 插件生成的HTML内容</p>
-        
-        <pre><code>console.log("Hello World!");</code></pre>
-    </article>
-
-    <script src="../js/theme.js"></script>
-</body>
-</html>
-```
-
-
-
-### 3. 样式设计
-
-样式设计分为暗色和亮色两套主题，使用CSS变量实现主题颜色的统一管理。
-
-#### 暗色主题 (dark.css)
-
-```css
-:root {
-    --bg-color: #1E1E1E;
-    --text-color: #D4D4D4;
-    --code-bg: #252526;
-    --border-color: #3C3C3C;
-}
-
-body {
-    background: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Consolas', monospace;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-/* 其他样式... */
-```
-
-#### 亮色主题 (light.css)
-
-```css
-:root {
-    --bg-color: #FFFFFF;
-    --text-color: #1E1E1E;
-    --code-bg: #F3F3F3;
-    --border-color: #E8E8E8;
-}
-
-body {
-    background: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Consolas', monospace;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-/* 其他样式... */
-```
-
-## 设计特点
-
-1. 采用极简设计
-
-2. 模仿VSCode的界面风格，对程序员友好
-
-3. 基础的响应式设计，适应不同屏幕尺寸
-
-4. 支持暗色/亮色主题切换
+3. **提高了页面一致性**：统一了所有页面的头部、导航和页脚
 
    
 
-## 局限性
+## 用户体验提升
 
-1. **内容管理**: 文章内容直接硬编码在HTML中，不便于更新和管理
+1. **导航更加便捷**：用户可以在任何页面轻松访问"关于我"和文章列表
 
-2. **导航功能**: 缺乏完善的导航和返回功能
-
-   
-
-## 未来改进方向
-
-1. **添加关于页面**: 增加博主个人介绍页面
-
-2. **改进导航**: 优化导航结构，增加返回首页链接
-
-3. **Markdown支持**: 引入Markdown解析功能，便于内容管理
+2. **页面布局更加合理**：内容组织更加清晰，提高了可读性
 
    
 
-## 总结
+## 移除了HIM
 
-V1版本作为博客系统的初始版本，虽然功能简单，但已经实现了基础的博客展示和主题切换功能。
-
-通过纯静态技术栈，确保了系统的轻量级和易部署性。
