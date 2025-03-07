@@ -6,7 +6,7 @@
 
 这是一个见证个人技术成长的渐进式项目，完整呈现了如何从基础静态网页起步，逐步构建动态内容管理系统的个人博客项目的技术演进路线
 
-## [DEMO](https://2dog-z.github.io)
+## [DEMO](https://2dogz.org/)
 
 ## 版本列表：
 [V1](https://github.com/2dog-Z/Doglog/tree/v1)
