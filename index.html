@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2Dog的小窝</title>
+    <!-- 主题切换链接 -->
+    <link id="theme-style" rel="stylesheet" href="css/dark.css">
+</head>
+<body>
+    <header>
+        <h1><a href="index.html" title="点击返回首页">2Dog的小窝</a></h1>
+        <button onclick="toggleTheme()" title="切换主题">
+            <span class="icon">🌓</span>
+        </button>
+
+    </header>
+
+    <div class="about-link">
+        <a href="about.html">关于我</a>
+    </div>   
+    <div class="nav-container">
+        <nav>
+            <h3>文章列表</h3>
+            <ul>
+                <!-- 文章列表将通过markdown.js动态加载 -->
+            </ul>
+
+        </nav>
+    </div>
+
+    <footer>
+        <p><a href="https://github.com/2dog-Z" target="_blank">GitHub</a> | 持续迭代的数字足迹, Let's build something meaningful!</p>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <!-- 先加载预生成的文章列表数据 -->
+<script src="js/articles.js"></script>
+<script src="js/markdown.js"></script>
+</body>
+</html>
