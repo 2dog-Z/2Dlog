@@ -8,12 +8,13 @@
 
 ## [DEMO](https://2dog-z.github.io)
 
-## 历史版本：
+## 版本列表：
 [V1](https://github.com/2dog-Z/Doglog/tree/v1)
 [V2](https://github.com/2dog-Z/Doglog/tree/v2)
 [V3](https://github.com/2dog-Z/Doglog/tree/v3)
 [V4](https://github.com/2dog-Z/Doglog/tree/v4)
 [V5](https://github.com/2dog-Z/Doglog/tree/v5)
+[V6](https://github.com/2dog-Z/Doglog/tree/v6)
 
 ## 项目概述
 
